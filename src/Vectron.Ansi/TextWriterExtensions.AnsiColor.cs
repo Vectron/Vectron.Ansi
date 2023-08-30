@@ -6,6 +6,17 @@ namespace Vectron.Ansi;
 public static partial class TextWriterExtensions
 {
     /// <summary>
+    /// Write a ANSI colored code..
+    /// </summary>
+    /// <param name="textWriter">The <see cref="TextWriter"/> to use.</param>
+    /// <param name="color">The <see cref="AnsiColor"/>.</param>
+    public static void WriteColor(this TextWriter textWriter, AnsiColor color)
+    {
+        var escapeCode = AnsiHelper.GetAnsiEscapeCode(color);
+        textWriter.Write(escapeCode);
+    }
+
+    /// <summary>
     /// Write a colored message and reset the color at the end.
     /// </summary>
     /// <param name="textWriter">The <see cref="TextWriter"/> to use.</param>
