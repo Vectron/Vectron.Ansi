@@ -21,10 +21,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9901B810
 	ProjectSection(SolutionItems) = preProject
 		tests\.editorconfig = tests\.editorconfig
 		tests\Directory.Build.props = tests\Directory.Build.props
-		tests\Vectron.Ansi.Tests\Vectron.Ansi.Tests.csproj = tests\Vectron.Ansi.Tests\Vectron.Ansi.Tests.csproj
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vectron.Ansi", "src\Vectron.Ansi\Vectron.Ansi.csproj", "{3961026A-C1A4-4A44-ABDD-5420AACB7067}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vectron.Ansi.Tests", "tests\Vectron.Ansi.Tests\Vectron.Ansi.Tests.csproj", "{DBEE7CDA-496F-4214-A00F-CDF9C0D1DF9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,12 +37,17 @@ Global
 		{3961026A-C1A4-4A44-ABDD-5420AACB7067}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3961026A-C1A4-4A44-ABDD-5420AACB7067}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3961026A-C1A4-4A44-ABDD-5420AACB7067}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBEE7CDA-496F-4214-A00F-CDF9C0D1DF9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBEE7CDA-496F-4214-A00F-CDF9C0D1DF9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBEE7CDA-496F-4214-A00F-CDF9C0D1DF9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBEE7CDA-496F-4214-A00F-CDF9C0D1DF9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3961026A-C1A4-4A44-ABDD-5420AACB7067} = {9A5EDB26-8C8C-493A-9391-871DC681ADE7}
+		{DBEE7CDA-496F-4214-A00F-CDF9C0D1DF9D} = {9901B810-274B-4E6C-B412-913E95F3B9F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9972C1E9-9BD0-4244-9B21-03EFAFE52758}
