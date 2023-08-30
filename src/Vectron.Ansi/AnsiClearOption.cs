@@ -21,6 +21,11 @@ public enum AnsiClearOption
     EntireScreen,
 
     /// <summary>
+    /// Erase saved lines.
+    /// </summary>
+    SavedLines,
+
+    /// <summary>
     /// Clears from cursor to end of line.
     /// </summary>
     CursorToEndOfLine,
