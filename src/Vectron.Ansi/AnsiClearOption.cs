@@ -1,4 +1,4 @@
-﻿namespace Vectron.Ansi;
+namespace Vectron.Ansi;
 
 /// <summary>
 /// Possible ANSI clear commands.
