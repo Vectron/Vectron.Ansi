@@ -26,7 +26,7 @@ internal static partial class AnsiHelper
     /// <exception cref="NotSupportedException">When an unknown option is given.</exception>
     public static string GetAnsiEscapeCode(AnsiClearOption clearScreen)
         => clearScreen switch
-    {
+        {
             AnsiClearOption.CursorToEndOfScreen => $"{EscapeSequence}[0J",
             AnsiClearOption.CursorToStartOfScreen => $"{EscapeSequence}[1J",
             AnsiClearOption.EntireScreen => $"{EscapeSequence}[2J",
@@ -57,7 +57,7 @@ internal static partial class AnsiHelper
             AnsiColor.Cyan => 36,
             AnsiColor.White => 37,
             AnsiColor.Default => 39,
-            _ => 39,
+            _ => throw new NotSupportedException("Unknown color"),
         };
 
         if (background)
@@ -223,7 +223,7 @@ internal static partial class AnsiHelper
             ConsoleColor.Magenta => GetAnsiEscapeCode(AnsiColor.Magenta, bright: true, background),
             ConsoleColor.Yellow => GetAnsiEscapeCode(AnsiColor.Yellow, bright: true, background),
             ConsoleColor.White => GetAnsiEscapeCode(AnsiColor.White, bright: true, background),
-            _ => string.Empty,
+            _ => throw new NotSupportedException("Unknown color"),
         };
 
     /// <summary>
