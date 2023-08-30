@@ -52,9 +52,26 @@ public static partial class TextWriterExtensions
         textWriter.WriteLine();
     }
 
+    /// <summary>
+    /// Write the ANSI reset code.
+    /// </summary>
+    /// <param name="textWriter">The <see cref="TextWriter"/> to use.</param>
+    public static void WriteResetColorAndStyle(this TextWriter textWriter)
+        => textWriter.Write(AnsiHelper.ResetColorAndStyleAnsiEscapeCode);
+
     private static void WriteAnsiColorNumber(this TextWriter textWriter, byte color)
     {
         var colorCode = AnsiHelper.GetAnsiEscapeCode(color, background: false);
         textWriter.Write($"{colorCode}{color.ToString(CultureInfo.InvariantCulture),-4}");
+    }
+
+    private static void WriteCodeAndReset(this TextWriter textWriter, string text, string escapeCode)
+    => textWriter.Write(escapeCode + text + AnsiHelper.ResetColorAndStyleAnsiEscapeCode);
+
+    private static void WriteCodeAndReset(this TextWriter textWriter, Span<char> text, string escapeCode)
+    {
+        textWriter.Write(escapeCode);
+        textWriter.Write(text);
+        textWriter.Write(AnsiHelper.ResetColorAndStyleAnsiEscapeCode);
     }
 }
