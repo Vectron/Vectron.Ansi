@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace Vectron.Ansi;
 
 /// <summary>
@@ -10,8 +12,36 @@ public static partial class AnsiHelper
     /// </summary>
     /// <param name="color">The color.</param>
     /// <returns>A <see cref="string"/> containing the ANSI code.</returns>
-    public static string GetAnsiEscapeCode(System.Drawing.Color color)
+    public static string GetAnsiEscapeCode(Color color)
         => GetAnsiEscapeCode(color.R, color.G, color.B, background: false);
+
+    /// <summary>
+    /// Gets the ANSI color code for the given color.
+    /// </summary>
+    /// <param name="foregroundColor">The foreground color.</param>
+    /// <param name="backgroundColor">The background color.</param>
+    /// <returns>A <see cref="string"/> containing the ANSI code.</returns>
+    public static string GetAnsiEscapeCode(Color foregroundColor, Color backgroundColor)
+    {
+        var foregroundColorCode = GetAnsiEscapeCode(foregroundColor, background: false);
+        var backgroundColorCode = GetAnsiEscapeCode(backgroundColor, background: true);
+        return $"{foregroundColorCode}{backgroundColorCode}";
+    }
+
+    /// <summary>
+    /// Gets the ANSI color code for the given color.
+    /// </summary>
+    /// <param name="foregroundColor">The foreground color.</param>
+    /// <param name="backgroundColor">The background color.</param>
+    /// <param name="style">The text style.</param>
+    /// <returns>A <see cref="string"/> containing the ANSI code.</returns>
+    public static string GetAnsiEscapeCode(Color foregroundColor, Color backgroundColor, AnsiStyle style)
+    {
+        var foregroundColorCode = GetAnsiEscapeCode(foregroundColor, background: false);
+        var backgroundColorCode = GetAnsiEscapeCode(backgroundColor, background: true);
+        var styleCode = GetAnsiEscapeCode(style);
+        return $"{foregroundColorCode}{backgroundColorCode}{styleCode}";
+    }
 
     /// <summary>
     /// Gets the ANSI color code for the given color.
@@ -19,7 +49,7 @@ public static partial class AnsiHelper
     /// <param name="color">The color.</param>
     /// <param name="background"><see langword="true"/> when the color is the background color.</param>
     /// <returns>A <see cref="string"/> containing the ANSI code.</returns>
-    public static string GetAnsiEscapeCode(System.Drawing.Color color, bool background)
+    public static string GetAnsiEscapeCode(Color color, bool background)
         => GetAnsiEscapeCode(color.R, color.G, color.B, background);
 
     /// <summary>
@@ -31,6 +61,41 @@ public static partial class AnsiHelper
     /// <returns>A <see cref="string"/> containing the ANSI code.</returns>
     public static string GetAnsiEscapeCode(byte red, byte green, byte blue)
         => GetAnsiEscapeCode(red, green, blue, background: false);
+
+    /// <summary>
+    /// Gets the ANSI color code for the given color.
+    /// </summary>
+    /// <param name="foregroundRed">The foreground red part.</param>
+    /// <param name="foregroundGreen">The foreground green part.</param>
+    /// <param name="foregroundBlue">The foreground blue part.</param>
+    /// <param name="backgroundRed">The background red part.</param>
+    /// <param name="backgroundGreen">The background green part.</param>
+    /// <param name="backgroundBlue">The background blue part.</param>
+    /// <returns>A <see cref="string"/> containing the ANSI code.</returns>
+    public static string GetAnsiEscapeCode(byte foregroundRed, byte foregroundGreen, byte foregroundBlue, byte backgroundRed, byte backgroundGreen, byte backgroundBlue)
+    {
+        var foregroundColorCode = GetAnsiEscapeCode(foregroundRed, foregroundGreen, foregroundBlue, background: false);
+        var backgroundColorCode = GetAnsiEscapeCode(backgroundRed, backgroundGreen, backgroundBlue, background: true);
+        return $"{foregroundColorCode}{backgroundColorCode}";
+    }
+
+    /// <summary>
+    /// Gets the ANSI color code for the given color.
+    /// </summary>
+    /// <param name="foregroundRed">The foreground red part.</param>
+    /// <param name="foregroundGreen">The foreground green part.</param>
+    /// <param name="foregroundBlue">The foreground blue part.</param>
+    /// <param name="backgroundRed">The background red part.</param>
+    /// <param name="backgroundGreen">The background green part.</param>
+    /// <param name="backgroundBlue">The background blue part.</param>
+    /// <param name="style">The text style.</param>
+    /// <returns>A <see cref="string"/> containing the ANSI code.</returns>
+    public static string GetAnsiEscapeCode(byte foregroundRed, byte foregroundGreen, byte foregroundBlue, byte backgroundRed, byte backgroundGreen, byte backgroundBlue, AnsiStyle style)
+    {
+        var foregroundColorCode = GetAnsiEscapeCode(foregroundRed, foregroundGreen, foregroundBlue, background: false, style);
+        var backgroundColorCode = GetAnsiEscapeCode(backgroundRed, backgroundGreen, backgroundBlue, background: true, style);
+        return $"{foregroundColorCode}{backgroundColorCode}";
+    }
 
     /// <summary>
     /// Gets the ANSI color code for the given color.
@@ -51,7 +116,7 @@ public static partial class AnsiHelper
     /// <param name="color">The color.</param>
     /// <param name="style">The text style.</param>
     /// <returns>A <see cref="string"/> containing the ANSI code.</returns>
-    public static string GetAnsiEscapeCode(System.Drawing.Color color, AnsiStyle style)
+    public static string GetAnsiEscapeCode(Color color, AnsiStyle style)
         => GetAnsiEscapeCode(color.R, color.G, color.B, background: false, style);
 
     /// <summary>
@@ -61,7 +126,7 @@ public static partial class AnsiHelper
     /// <param name="background"><see langword="true"/> when the color is the background color.</param>
     /// <param name="style">The text style.</param>
     /// <returns>A <see cref="string"/> containing the ANSI code.</returns>
-    public static string GetAnsiEscapeCode(System.Drawing.Color color, bool background, AnsiStyle style)
+    public static string GetAnsiEscapeCode(Color color, bool background, AnsiStyle style)
         => GetAnsiEscapeCode(color.R, color.G, color.B, background, style);
 
     /// <summary>
