@@ -94,13 +94,13 @@ internal static partial class AnsiHelper
     /// <summary>
     /// Gets the ANSI color code for the given color.
     /// </summary>
-    /// <param name="xtermColor">The color.</param>
+    /// <param name="byteColor">The color.</param>
     /// <param name="background"><see langword="true"/> when the color is the background color.</param>
     /// <returns>A <see cref="string"/> containing the ANSI code.</returns>
-    public static string GetAnsiEscapeCode(byte xtermColor, bool background)
+    public static string GetAnsiEscapeCode(byte byteColor, bool background)
         => background
-            ? $"{EscapeSequence}[48;5;{xtermColor}m"
-            : $"{EscapeSequence}[38;5;{xtermColor}m";
+            ? $"{EscapeSequence}[48;5;{byteColor}m"
+            : $"{EscapeSequence}[38;5;{byteColor}m";
 
     /// <summary>
     /// Get the ANSI escape code for the given parameters.
