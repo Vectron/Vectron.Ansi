@@ -9,7 +9,7 @@ public static partial class TextWriterExtensions
     /// Write a ANSI colored code..
     /// </summary>
     /// <param name="textWriter">The <see cref="TextWriter"/> to use.</param>
-    /// <param name="color">The <see cref="AnsiColor"/>.</param>
+    /// <param name="color">The <see cref="byte"/>.</param>
     public static void WriteColor(this TextWriter textWriter, byte color)
     {
         var escapeCode = AnsiHelper.GetAnsiEscapeCode(color);
