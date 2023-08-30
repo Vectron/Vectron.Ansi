@@ -42,6 +42,6 @@ public static partial class AnsiHelper
     /// </summary>
     /// <param name="input">The input string.</param>
     /// <returns>A string without cursor escape codes.</returns>
-    public static string RemoveAnsiCursorCode(this string input)
+    public static string RemoveAnsiCursorCode(string input)
         => MatchCursorEscapeSequence().Replace(input, string.Empty);
 }
