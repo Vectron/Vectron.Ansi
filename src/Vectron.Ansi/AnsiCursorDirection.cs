@@ -24,4 +24,19 @@ public enum AnsiCursorDirection
     /// Move the cursor left.
     /// </summary>
     Left,
+
+    /// <summary>
+    /// Moves cursor to beginning of next line, # lines down.
+    /// </summary>
+    BeginningNextLine,
+
+    /// <summary>
+    /// Moves cursor to beginning of previous line, # lines up.
+    /// </summary>
+    BeginningPreviousLine,
+
+    /// <summary>
+    /// Moves cursor to column #.
+    /// </summary>
+    Column,
 }

@@ -162,7 +162,8 @@ internal static partial class AnsiHelper
     /// <exception cref="NotSupportedException">When an unknown option is given.</exception>
     public static string GetAnsiEscapeCode(AnsiCursorDirection cursorDirection, int amount)
     {
-        if (amount == 0)
+        if (amount == 0
+            && cursorDirection != AnsiCursorDirection.Column)
         {
             return string.Empty;
         }
@@ -173,6 +174,9 @@ internal static partial class AnsiHelper
             AnsiCursorDirection.Down => 'B',
             AnsiCursorDirection.Right => 'C',
             AnsiCursorDirection.Left => 'D',
+            AnsiCursorDirection.BeginningNextLine => 'E',
+            AnsiCursorDirection.BeginningPreviousLine => 'F',
+            AnsiCursorDirection.Column => 'G',
             _ => throw new NotSupportedException("Unknown cursor direction"),
         };
 
