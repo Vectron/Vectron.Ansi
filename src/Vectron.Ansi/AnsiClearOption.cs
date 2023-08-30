@@ -13,7 +13,7 @@ public enum AnsiClearOption
     /// <summary>
     /// Clears from cursor to start of screen.
     /// </summary>
-    CursorToEndStartOfScreen,
+    CursorToStartOfScreen,
 
     /// <summary>
     /// Clear the entire screen.
@@ -28,7 +28,7 @@ public enum AnsiClearOption
     /// <summary>
     /// Clears from cursor to start of line.
     /// </summary>
-    CursorToEndStartOfLine,
+    CursorToStartOfLine,
 
     /// <summary>
     /// Clear the entire line.

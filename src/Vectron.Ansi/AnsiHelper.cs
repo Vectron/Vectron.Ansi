@@ -29,10 +29,10 @@ internal static partial class AnsiHelper
         var value = clearScreen switch
         {
             AnsiClearOption.CursorToEndOfScreen => '0',
-            AnsiClearOption.CursorToEndStartOfScreen => '1',
+            AnsiClearOption.CursorToStartOfScreen => '1',
             AnsiClearOption.EntireScreen => '2',
             AnsiClearOption.CursorToEndOfLine => '0',
-            AnsiClearOption.CursorToEndStartOfLine => '1',
+            AnsiClearOption.CursorToStartOfLine => '1',
             AnsiClearOption.EntireLine => '2',
             _ => throw new NotSupportedException("Unknown options"),
         };
@@ -40,10 +40,10 @@ internal static partial class AnsiHelper
         var option = clearScreen switch
         {
             AnsiClearOption.CursorToEndOfScreen => 'J',
-            AnsiClearOption.CursorToEndStartOfScreen => 'J',
+            AnsiClearOption.CursorToStartOfScreen => 'J',
             AnsiClearOption.EntireScreen => 'J',
             AnsiClearOption.CursorToEndOfLine => 'K',
-            AnsiClearOption.CursorToEndStartOfLine => 'K',
+            AnsiClearOption.CursorToStartOfLine => 'K',
             AnsiClearOption.EntireLine => 'K',
             _ => throw new NotSupportedException("Unknown options"),
         };
