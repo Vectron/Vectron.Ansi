@@ -103,6 +103,20 @@ internal static partial class AnsiHelper
             : $"{EscapeSequence}[38;5;{byteColor}m";
 
     /// <summary>
+    /// Gets the ANSI color code for the given color.
+    /// </summary>
+    /// <param name="byteColor">The color.</param>
+    /// <param name="background"><see langword="true"/> when the color is the background color.</param>
+    /// <param name="style">The text style.</param>
+    /// <returns>A <see cref="string"/> containing the ANSI code.</returns>
+    public static string GetAnsiEscapeCode(byte byteColor, bool background, AnsiStyle style)
+    {
+        var colorCode = GetAnsiEscapeCode(byteColor, background);
+        var styleCode = GetAnsiEscapeCode(style);
+        return $"{colorCode}{styleCode}";
+    }
+
+    /// <summary>
     /// Get the ANSI escape code for the given parameters.
     /// </summary>
     /// <param name="foregroundColor">The foreground color.</param>
