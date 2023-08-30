@@ -3,7 +3,7 @@ namespace Vectron.Ansi;
 /// <summary>
 /// A shim when using older dotnet version that don't contain the regex source generator.
 /// </summary>
-internal static partial class AnsiHelper
+public static partial class AnsiHelper
 {
 #if !NET7_0_OR_GREATER
 

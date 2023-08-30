@@ -3,7 +3,7 @@ namespace Vectron.Ansi;
 /// <summary>
 /// A helper class for generating ANSI escape sequences.
 /// </summary>
-internal static partial class AnsiHelper
+public static partial class AnsiHelper
 {
     /// <summary>
     /// Gets the ANSI clear code for the given option.

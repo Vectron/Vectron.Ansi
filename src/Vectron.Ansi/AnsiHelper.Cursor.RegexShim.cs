@@ -3,7 +3,7 @@ namespace Vectron.Ansi;
 /// <summary>
 /// A helper class for generating ANSI escape sequences.
 /// </summary>
-internal static partial class AnsiHelper
+public static partial class AnsiHelper
 {
 #if NET7_0_OR_GREATER
     /// <summary>
