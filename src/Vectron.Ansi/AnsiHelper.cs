@@ -78,9 +78,9 @@ internal static partial class AnsiHelper
     /// <returns>A <see cref="string"/> containing the ANSI code.</returns>
     public static string GetAnsiEscapeCode(AnsiColor color, bool bright, bool background, AnsiStyle style)
     {
-        var foregroundColorCode = GetAnsiEscapeCode(color, bright, background);
+        var colorCode = GetAnsiEscapeCode(color, bright, background);
         var styleCode = GetAnsiEscapeCode(style);
-        return $"{foregroundColorCode}{styleCode}";
+        return $"{colorCode}{styleCode}";
     }
 
     /// <summary>
