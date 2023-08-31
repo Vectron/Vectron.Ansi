@@ -160,7 +160,7 @@ public class AnsiParser
                         ForegroundColor = null,
                         Foreground256Color = null,
                         ForegroundBright = false,
-                        ForegroundRGBColor = System.Drawing.Color.FromArgb(red, green, blue),
+                        ForegroundRGBColor = (red, green, blue),
                     };
 
                     continue;
@@ -171,7 +171,7 @@ public class AnsiParser
                     BackgroundColor = null,
                     Background256Color = null,
                     BackgroundBright = false,
-                    BackgroundRGBColor = System.Drawing.Color.FromArgb(red, green, blue),
+                    BackgroundRGBColor = (red, green, blue),
                 };
                 continue;
             }
