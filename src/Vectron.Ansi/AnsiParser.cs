@@ -69,12 +69,7 @@ public class AnsiParser
             if (IsStyle(escapeCode))
             {
                 var styleCode = escapeCode[2..^1];
-                if (!byte.TryParse(styleCode, out var value))
-                {
-                    unknownCodes.Add(match.Value);
-                    continue;
-                }
-
+                var value = byte.Parse(styleCode, System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture);
                 var style = GetStyle(value);
                 currentStyle = currentStyle with
                 {
@@ -86,12 +81,7 @@ public class AnsiParser
             if (IsResetStyle(escapeCode))
             {
                 var styleCode = escapeCode[3..^1];
-                if (!byte.TryParse(styleCode, out var value))
-                {
-                    unknownCodes.Add(match.Value);
-                    continue;
-                }
-
+                var value = byte.Parse(styleCode, System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture);
                 var style = GetResetStyle(value);
                 currentStyle = currentStyle with
                 {
@@ -105,6 +95,7 @@ public class AnsiParser
                 var colorNumberSpan = escapeCode[7..^1];
                 if (!byte.TryParse(colorNumberSpan, out var colorNumber))
                 {
+                    unknownCodes.Add(match.Value);
                     continue;
                 }
 
