@@ -34,7 +34,7 @@ public static partial class TextWriterExtensions
     /// <param name="textWriter">The <see cref="TextWriter"/> to use.</param>
     /// <param name="text">The text to write.</param>
     /// <param name="style">The text style.</param>
-    public static void WriteStyled(this TextWriter textWriter, Span<char> text, AnsiStyle style)
+    public static void WriteStyled(this TextWriter textWriter, ReadOnlySpan<char> text, AnsiStyle style)
     {
         var styleCode = AnsiHelper.GetAnsiEscapeCode(style);
         textWriter.WriteCodeAndReset(text, styleCode);
