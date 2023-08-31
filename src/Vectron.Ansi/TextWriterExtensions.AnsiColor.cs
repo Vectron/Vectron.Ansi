@@ -11,6 +11,25 @@ public static partial class TextWriterExtensions
     /// <param name="textWriter">The <see cref="TextWriter"/> to use.</param>
     /// <param name="color">The <see cref="AnsiColor"/>.</param>
     public static void WriteColor(this TextWriter textWriter, AnsiColor color)
+        => textWriter.WriteColor(color, bright: false, background: false);
+
+    /// <summary>
+    /// Write a ANSI colored code..
+    /// </summary>
+    /// <param name="textWriter">The <see cref="TextWriter"/> to use.</param>
+    /// <param name="color">The <see cref="AnsiColor"/>.</param>
+    /// <param name="bright"><see langword="true"/> if color should be bright.</param>
+    public static void WriteColor(this TextWriter textWriter, AnsiColor color, bool bright)
+        => textWriter.WriteColor(color, bright, background: false);
+
+    /// <summary>
+    /// Write a ANSI colored code..
+    /// </summary>
+    /// <param name="textWriter">The <see cref="TextWriter"/> to use.</param>
+    /// <param name="color">The <see cref="AnsiColor"/>.</param>
+    /// <param name="bright"><see langword="true"/> if color should be bright.</param>
+    /// <param name="background"><see langword="true"/> if color is for the background.</param>
+    public static void WriteColor(this TextWriter textWriter, AnsiColor color, bool bright, bool background)
     {
         var escapeCode = AnsiHelper.GetAnsiEscapeCode(color);
         textWriter.Write(escapeCode);
