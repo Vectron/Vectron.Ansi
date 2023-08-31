@@ -1,5 +1,3 @@
-using System.Drawing;
-
 namespace Vectron.Ansi.Tests;
 
 [TestClass]
@@ -40,9 +38,9 @@ public class AnsiParserTest
         new object[] { "\x1B[48;5;110mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { Background256Color = 110 } },
         new object[] { "\x1B[38;5;110m\x1b[48;5;115mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { Foreground256Color = 110, Background256Color = 115 } },
 
-        new object[] { "\x1B[38;2;200;200;200mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundRGBColor = Color.FromArgb(200, 200, 200) } },
-        new object[] { "\x1B[48;2;200;200;200mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { BackgroundRGBColor = Color.FromArgb(200, 200, 200) } },
-        new object[] { "\x1B[38;2;200;200;200m\x1b[48;2;100;100;100mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundRGBColor = Color.FromArgb(200, 200, 200), BackgroundRGBColor = Color.FromArgb(100, 100, 100) } },
+        new object[] { "\x1B[38;2;200;200;200mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundRGBColor = (200, 200, 200) } },
+        new object[] { "\x1B[48;2;200;200;200mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { BackgroundRGBColor = (200, 200, 200) } },
+        new object[] { "\x1B[38;2;200;200;200m\x1b[48;2;100;100;100mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundRGBColor = (200, 200, 200), BackgroundRGBColor = (100, 100, 100) } },
 
         new object[] { "\x1b[1mFirst text part", "First text part", new AnsiParserFoundStyle() { Style = AnsiStyle.Bold } },
         new object[] { "\x1b[2mFirst text part", "First text part", new AnsiParserFoundStyle() { Style = AnsiStyle.DimFaint } },
