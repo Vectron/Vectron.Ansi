@@ -8,6 +8,18 @@ public class AnsiParserTest
     private static object[] ParserCanParseValidANSIColorAndStyleCodesData => new[]
     {
         new object[] { "First text part", "First text part", default(AnsiParserFoundStyle) },
+
+        new object[] { "\x1B[30mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundColor = AnsiColor.Black } },
+        new object[] { "\x1B[31mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundColor = AnsiColor.Red } },
+        new object[] { "\x1B[32mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundColor = AnsiColor.Green } },
+        new object[] { "\x1B[33mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundColor = AnsiColor.Yellow } },
+        new object[] { "\x1B[34mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundColor = AnsiColor.Blue } },
+        new object[] { "\x1B[35mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundColor = AnsiColor.Magenta } },
+        new object[] { "\x1B[36mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundColor = AnsiColor.Cyan } },
+        new object[] { "\x1B[37mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundColor = AnsiColor.White } },
+        new object[] { "\x1B[38mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundColor = AnsiColor.Default } },
+        new object[] { "\x1B[39mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundColor = AnsiColor.Default } },
+
         new object[] { "\x1B[31mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundColor = AnsiColor.Red } },
         new object[] { "\x1B[1;32mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { ForegroundColor = AnsiColor.Green, ForegroundBright = true } },
         new object[] { "\x1B[41mFirst text part\x1b[0m", "First text part", new AnsiParserFoundStyle() { BackgroundColor = AnsiColor.Red } },
@@ -52,6 +64,43 @@ public class AnsiParserTest
         new object[] { "\x1b[8m\x1b[28mFirst text part", "First text part", default(AnsiParserFoundStyle) },
         new object[] { "\x1b[9m\x1b[29mFirst text part", "First text part", default(AnsiParserFoundStyle) },
     };
+
+    [TestMethod]
+    [DataRow("\x1b[m")]
+    [DataRow("\x1b[3%m")]
+    [DataRow("\x1b[61m")]
+    [DataRow("\x1b[21m")]
+    [DataRow("\x1b[#m")]
+    [DataRow("\x1b[0J")]
+    [DataRow("\x1b[38;2;###;+++m")]
+    [DataRow("\x1b[38;2;#;+;-m")]
+    [DataRow("\x1b[38;2;#;105;254m")]
+    [DataRow("\x1b[38;2;10;#;254m")]
+    [DataRow("\x1b[38;2;10;105;#m")]
+    [DataRow("\x1b[38;5;###m")]
+    public void InvalidCodesArePushedIntoUnknownCode(string input)
+    {
+        // Arrange
+        var triggered = false;
+        var value = input + "First text part\u001b[0m";
+        var expected = "First text part";
+        var expectedStyle = default(AnsiParserFoundStyle);
+        var parser = new AnsiParser(Validate);
+
+        // Act
+        parser.Parse(value);
+
+        // Assert
+        Assert.IsTrue(triggered);
+        void Validate(ReadOnlySpan<char> text, AnsiParserFoundStyle parsedStyle, IEnumerable<string> unknownCodes)
+        {
+            triggered = true;
+            Assert.AreEqual(expected, text.ToString());
+            Assert.AreEqual(expectedStyle, parsedStyle);
+            Assert.AreEqual(1, unknownCodes.Count());
+            Assert.AreEqual(input, unknownCodes.First());
+        }
+    }
 
     [TestMethod]
     [DoNotParallelize]
