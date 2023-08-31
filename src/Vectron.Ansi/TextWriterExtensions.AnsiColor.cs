@@ -31,7 +31,7 @@ public static partial class TextWriterExtensions
     /// <param name="background"><see langword="true"/> if color is for the background.</param>
     public static void WriteColor(this TextWriter textWriter, AnsiColor color, bool bright, bool background)
     {
-        var escapeCode = AnsiHelper.GetAnsiEscapeCode(color);
+        var escapeCode = AnsiHelper.GetAnsiEscapeCode(color, bright, background);
         textWriter.Write(escapeCode);
     }
 
