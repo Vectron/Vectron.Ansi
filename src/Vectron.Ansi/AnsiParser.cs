@@ -112,18 +112,15 @@ public class AnsiParser
                     continue;
                 }
 
-                if (escapeCode[2] == '4')
+                currentStyle = currentStyle with
                 {
-                    currentStyle = currentStyle with
-                    {
-                        BackgroundColor = null,
-                        BackgroundBright = false,
-                        Background256Color = colorNumber,
-                        BackgroundRGBColor = null,
-                    };
+                    BackgroundColor = null,
+                    BackgroundBright = false,
+                    Background256Color = colorNumber,
+                    BackgroundRGBColor = null,
+                };
 
-                    continue;
-                }
+                continue;
             }
 
             if (IsRGBColor(escapeCode))
@@ -169,19 +166,13 @@ public class AnsiParser
                     continue;
                 }
 
-                if (escapeCode[2] == '4')
+                currentStyle = currentStyle with
                 {
-                    currentStyle = currentStyle with
-                    {
-                        BackgroundColor = null,
-                        Background256Color = null,
-                        BackgroundBright = false,
-                        BackgroundRGBColor = System.Drawing.Color.FromArgb(red, green, blue),
-                    };
-                    continue;
-                }
-
-                unknownCodes.Add(match.Value);
+                    BackgroundColor = null,
+                    Background256Color = null,
+                    BackgroundBright = false,
+                    BackgroundRGBColor = System.Drawing.Color.FromArgb(red, green, blue),
+                };
                 continue;
             }
 
@@ -206,8 +197,7 @@ public class AnsiParser
                 {
                     if (!byte.TryParse(colorCodes[codes[i]], out var value))
                     {
-                        unknownCodes.Add(match.Value);
-                        continue;
+                        break;
                     }
 
                     if (value == 1)
@@ -251,6 +241,9 @@ public class AnsiParser
                     }
                 }
             }
+
+            unknownCodes.Add(match.Value);
+            continue;
         }
 
         if (previousEnd != span.Length)
