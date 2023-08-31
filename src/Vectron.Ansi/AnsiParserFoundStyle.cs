@@ -1,4 +1,3 @@
-using System.Drawing;
 using System.Runtime.InteropServices;
 
 namespace Vectron.Ansi;
@@ -71,7 +70,7 @@ public readonly record struct AnsiParserFoundStyle()
     /// <summary>
     /// Gets the rgb foreground color.
     /// </summary>
-    public Color? ForegroundRGBColor
+    public (int Red, int Green, int Blue)? ForegroundRGBColor
     {
         get;
         init;
@@ -80,9 +79,59 @@ public readonly record struct AnsiParserFoundStyle()
     /// <summary>
     /// Gets the rgb background color.
     /// </summary>
-    public Color? BackgroundRGBColor
+    public (int Red, int Green, int Blue)? BackgroundRGBColor
     {
         get;
         init;
+    }
+
+    /// <summary>
+    /// Convert the foreground color to RGB channels.
+    /// </summary>
+    /// <param name="colorMappingStyle">The mapping style to use for the default 16 colors.</param>
+    /// <returns>The converted color.</returns>
+    public (int Red, int Green, int Blue) ConvertForegroundColorToRGB(AnsiColorMappingStyle colorMappingStyle = AnsiColorMappingStyle.TerminalApp)
+    {
+        if (ForegroundColor.HasValue)
+        {
+            return AnsiHelper.AnsiColorToRGB(ForegroundColor.Value, ForegroundBright, colorMappingStyle);
+        }
+
+        if (Foreground256Color.HasValue)
+        {
+            return AnsiHelper.Ansi256ColorToRGB(Foreground256Color.Value, colorMappingStyle);
+        }
+
+        if (ForegroundRGBColor.HasValue)
+        {
+            return ForegroundRGBColor.Value;
+        }
+
+        return AnsiHelper.AnsiColorToRGB(AnsiColor.Default, bright: false, colorMappingStyle);
+    }
+
+    /// <summary>
+    /// Convert the background color to RGB channels.
+    /// </summary>
+    /// <param name="colorMappingStyle">The mapping style to use for the default 16 colors.</param>
+    /// <returns>The converted color.</returns>
+    public (int Red, int Green, int Blue) ConvertBackgroundColorToRGB(AnsiColorMappingStyle colorMappingStyle = AnsiColorMappingStyle.TerminalApp)
+    {
+        if (BackgroundColor.HasValue)
+        {
+            return AnsiHelper.AnsiColorToRGB(BackgroundColor.Value, BackgroundBright, colorMappingStyle);
+        }
+
+        if (Background256Color.HasValue)
+        {
+            return AnsiHelper.Ansi256ColorToRGB(Background256Color.Value, colorMappingStyle);
+        }
+
+        if (BackgroundRGBColor.HasValue)
+        {
+            return BackgroundRGBColor.Value;
+        }
+
+        return AnsiHelper.AnsiColorToRGB(AnsiColor.Default, bright: false, colorMappingStyle);
     }
 }
