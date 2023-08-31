@@ -118,7 +118,7 @@ public static partial class TextWriterExtensions
     /// <param name="textWriter">The <see cref="TextWriter"/> to use.</param>
     /// <param name="text">The text to write.</param>
     /// <param name="color">The <see cref="AnsiColor"/>.</param>
-    public static void WriteColored(this TextWriter textWriter, Span<char> text, AnsiColor color)
+    public static void WriteColored(this TextWriter textWriter, ReadOnlySpan<char> text, AnsiColor color)
     {
         var escapeCode = AnsiHelper.GetAnsiEscapeCode(color);
         textWriter.WriteCodeAndReset(text, escapeCode);
@@ -131,7 +131,7 @@ public static partial class TextWriterExtensions
     /// <param name="text">The text to write.</param>
     /// <param name="color">The <see cref="AnsiColor"/>.</param>
     /// <param name="style">The text style.</param>
-    public static void WriteColored(this TextWriter textWriter, Span<char> text, AnsiColor color, AnsiStyle style)
+    public static void WriteColored(this TextWriter textWriter, ReadOnlySpan<char> text, AnsiColor color, AnsiStyle style)
     {
         var escapeCode = AnsiHelper.GetAnsiEscapeCode(color, bright: false, background: false, style);
         textWriter.WriteCodeAndReset(text, escapeCode);
@@ -144,7 +144,7 @@ public static partial class TextWriterExtensions
     /// <param name="text">The text to write.</param>
     /// <param name="foregroundColor">The foreground <see cref="AnsiColor"/> to use.</param>
     /// <param name="backgroundColor">The background <see cref="AnsiColor"/> to use.</param>
-    public static void WriteColored(this TextWriter textWriter, Span<char> text, AnsiColor foregroundColor, AnsiColor backgroundColor)
+    public static void WriteColored(this TextWriter textWriter, ReadOnlySpan<char> text, AnsiColor foregroundColor, AnsiColor backgroundColor)
         => textWriter.WriteColored(text, foregroundColor, foregroundBright: false, backgroundColor, backgroundBright: false);
 
     /// <summary>
@@ -155,7 +155,7 @@ public static partial class TextWriterExtensions
     /// <param name="foregroundColor">The foreground <see cref="AnsiColor"/> to use.</param>
     /// <param name="backgroundColor">The background <see cref="AnsiColor"/> to use.</param>
     /// <param name="style">The text style.</param>
-    public static void WriteColored(this TextWriter textWriter, Span<char> text, AnsiColor foregroundColor, AnsiColor backgroundColor, AnsiStyle style)
+    public static void WriteColored(this TextWriter textWriter, ReadOnlySpan<char> text, AnsiColor foregroundColor, AnsiColor backgroundColor, AnsiStyle style)
         => textWriter.WriteColored(text, foregroundColor, foregroundBright: false, backgroundColor, backgroundBright: false, style);
 
     /// <summary>
@@ -167,7 +167,7 @@ public static partial class TextWriterExtensions
     /// <param name="foregroundBright"><see langword="true"/> if foreground color should be bright.</param>
     /// <param name="backgroundColor">The background <see cref="AnsiColor"/>.</param>
     /// <param name="backgroundBright"><see langword="true"/> if background color should be bright.</param>
-    public static void WriteColored(this TextWriter textWriter, Span<char> text, AnsiColor foregroundColor, bool foregroundBright, AnsiColor backgroundColor, bool backgroundBright)
+    public static void WriteColored(this TextWriter textWriter, ReadOnlySpan<char> text, AnsiColor foregroundColor, bool foregroundBright, AnsiColor backgroundColor, bool backgroundBright)
     {
         var escapeCode = AnsiHelper.GetAnsiEscapeCode(foregroundColor, foregroundBright, backgroundColor, backgroundBright);
         textWriter.WriteCodeAndReset(text, escapeCode);
@@ -183,7 +183,7 @@ public static partial class TextWriterExtensions
     /// <param name="backgroundColor">The background <see cref="AnsiColor"/>.</param>
     /// <param name="backgroundBright"><see langword="true"/> if background color should be bright.</param>
     /// <param name="style">The text style.</param>
-    public static void WriteColored(this TextWriter textWriter, Span<char> text, AnsiColor foregroundColor, bool foregroundBright, AnsiColor backgroundColor, bool backgroundBright, AnsiStyle style)
+    public static void WriteColored(this TextWriter textWriter, ReadOnlySpan<char> text, AnsiColor foregroundColor, bool foregroundBright, AnsiColor backgroundColor, bool backgroundBright, AnsiStyle style)
     {
         var escapeCode = AnsiHelper.GetAnsiEscapeCode(foregroundColor, foregroundBright, backgroundColor, backgroundBright, style);
         textWriter.WriteCodeAndReset(text, escapeCode);

@@ -68,7 +68,7 @@ public static partial class TextWriterExtensions
     private static void WriteCodeAndReset(this TextWriter textWriter, string text, string escapeCode)
     => textWriter.Write(escapeCode + text + AnsiHelper.ResetColorAndStyleAnsiEscapeCode);
 
-    private static void WriteCodeAndReset(this TextWriter textWriter, Span<char> text, string escapeCode)
+    private static void WriteCodeAndReset(this TextWriter textWriter, ReadOnlySpan<char> text, string escapeCode)
     {
         textWriter.Write(escapeCode);
         textWriter.Write(text);
