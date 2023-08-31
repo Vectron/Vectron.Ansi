@@ -86,6 +86,18 @@ public readonly record struct AnsiParserFoundStyle()
     }
 
     /// <summary>
+    /// Gets a value indicating whether there is a foreground color available.
+    /// </summary>
+    public bool HasForegroundColor
+        => ForegroundColor.HasValue || Foreground256Color.HasValue || ForegroundRGBColor.HasValue;
+
+    /// <summary>
+    /// Gets a value indicating whether there is a foreground color available.
+    /// </summary>
+    public bool HasBackgroundColor
+        => BackgroundColor.HasValue || Background256Color.HasValue || BackgroundRGBColor.HasValue;
+
+    /// <summary>
     /// Convert the foreground color to RGB channels.
     /// </summary>
     /// <param name="colorMappingStyle">The mapping style to use for the default 16 colors.</param>
