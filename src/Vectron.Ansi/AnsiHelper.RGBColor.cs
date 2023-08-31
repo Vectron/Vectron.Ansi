@@ -92,9 +92,10 @@ public static partial class AnsiHelper
     /// <returns>A <see cref="string"/> containing the ANSI code.</returns>
     public static string GetAnsiEscapeCode(byte foregroundRed, byte foregroundGreen, byte foregroundBlue, byte backgroundRed, byte backgroundGreen, byte backgroundBlue, AnsiStyle style)
     {
-        var foregroundColorCode = GetAnsiEscapeCode(foregroundRed, foregroundGreen, foregroundBlue, background: false, style);
-        var backgroundColorCode = GetAnsiEscapeCode(backgroundRed, backgroundGreen, backgroundBlue, background: true, style);
-        return $"{foregroundColorCode}{backgroundColorCode}";
+        var foregroundColorCode = GetAnsiEscapeCode(foregroundRed, foregroundGreen, foregroundBlue, background: false);
+        var backgroundColorCode = GetAnsiEscapeCode(backgroundRed, backgroundGreen, backgroundBlue, background: true);
+        var styleCode = GetAnsiEscapeCode(style);
+        return $"{foregroundColorCode}{backgroundColorCode}{styleCode}";
     }
 
     /// <summary>
