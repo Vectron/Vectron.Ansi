@@ -6,17 +6,12 @@ namespace Vectron.Ansi;
 /// <summary>
 /// An ANSI color string parser.
 /// </summary>
-public class AnsiParser
+/// <remarks>
+/// Initializes a new instance of the <see cref="AnsiParser"/> class.
+/// </remarks>
+/// <param name="onParseWrite">The method to execute on write.</param>
+public class AnsiParser(AnsiParser.ParserWrite onParseWrite)
 {
-    private readonly ParserWrite onParseWrite;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="AnsiParser"/> class.
-    /// </summary>
-    /// <param name="onParseWrite">The method to execute on write.</param>
-    public AnsiParser(ParserWrite onParseWrite)
-        => this.onParseWrite = onParseWrite;
-
     /// <summary>
     /// An action to run when the parser found an escaped text.
     /// </summary>
