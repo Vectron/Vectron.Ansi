@@ -26,8 +26,8 @@ public class SpanExtensionsTests
 
         var expected = new Range[2]
         {
-            new Range(new Index(0), new Index(4)),
-            new Range(new Index(5), new Index(source.Length)),
+            new(new Index(0), new Index(4)),
+            new(new Index(5), new Index(source.Length)),
         };
 
         // Act
