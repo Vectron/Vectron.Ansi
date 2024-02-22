@@ -18,7 +18,7 @@ public class AnsiParser(AnsiParser.ParserWrite onParseWrite)
     /// <param name="text">The found text part.</param>
     /// <param name="parsedStyle">The found ANSI parameters for the text.</param>
     /// <param name="unknownCodes">A <see cref="IEnumerable{T}"/> with not parsed codes.</param>
-    public delegate void ParserWrite(ReadOnlySpan<char> text, AnsiParserFoundStyle parsedStyle, IEnumerable<string> unknownCodes);
+    public delegate void ParserWrite(ReadOnlySpan<char> text, in AnsiParserFoundStyle parsedStyle, IEnumerable<string> unknownCodes);
 
     /// <summary>
     /// Parse the text into ANSI escaped parts.
@@ -43,7 +43,7 @@ public class AnsiParser(AnsiParser.ParserWrite onParseWrite)
             var escapeCode = match.ValueSpan;
             if (previousEnd != match.Index)
             {
-                onParseWrite(span[previousEnd..match.Index], currentStyle, unknownCodes);
+                onParseWrite(span[previousEnd..match.Index], in currentStyle, unknownCodes);
             }
 
             previousEnd = match.Index + match.Length;
@@ -55,13 +55,13 @@ public class AnsiParser(AnsiParser.ParserWrite onParseWrite)
                 continue;
             }
 
-            if (IsResetStyleAndColor(escapeCode))
+            if (IsResetStyleAndColor(in escapeCode))
             {
                 currentStyle = default;
                 continue;
             }
 
-            if (IsStyle(escapeCode))
+            if (IsStyle(in escapeCode))
             {
                 var styleCode = escapeCode[2..^1];
                 var value = byte.Parse(styleCode, System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture);
@@ -73,7 +73,7 @@ public class AnsiParser(AnsiParser.ParserWrite onParseWrite)
                 continue;
             }
 
-            if (IsResetStyle(escapeCode))
+            if (IsResetStyle(in escapeCode))
             {
                 var styleCode = escapeCode[3..^1];
                 var value = byte.Parse(styleCode, System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture);
@@ -85,7 +85,7 @@ public class AnsiParser(AnsiParser.ParserWrite onParseWrite)
                 continue;
             }
 
-            if (Is265Color(escapeCode))
+            if (Is265Color(in escapeCode))
             {
                 var colorNumberSpan = escapeCode[7..^1];
                 if (!byte.TryParse(colorNumberSpan, out var colorNumber))
@@ -118,7 +118,7 @@ public class AnsiParser(AnsiParser.ParserWrite onParseWrite)
                 continue;
             }
 
-            if (IsRGBColor(escapeCode))
+            if (IsRGBColor(in escapeCode))
             {
                 var colors = new Range[3];
                 var colorCodes = escapeCode[7..^1];
@@ -243,7 +243,7 @@ public class AnsiParser(AnsiParser.ParserWrite onParseWrite)
 
         if (previousEnd != span.Length)
         {
-            onParseWrite(span[previousEnd..], currentStyle, unknownCodes);
+            onParseWrite(span[previousEnd..], in currentStyle, unknownCodes);
         }
     }
 
