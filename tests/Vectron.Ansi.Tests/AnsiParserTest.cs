@@ -90,7 +90,7 @@ public class AnsiParserTest
 
         // Assert
         Assert.IsTrue(triggered);
-        void Validate(ReadOnlySpan<char> text, AnsiParserFoundStyle parsedStyle, IEnumerable<string> unknownCodes)
+        void Validate(ReadOnlySpan<char> text, in AnsiParserFoundStyle parsedStyle, IEnumerable<string> unknownCodes)
         {
             triggered = true;
             Assert.AreEqual(expected, text.ToString());
@@ -114,7 +114,7 @@ public class AnsiParserTest
 
         // Assert
         Assert.IsTrue(triggered);
-        void Validate(ReadOnlySpan<char> text, AnsiParserFoundStyle parsedStyle, IEnumerable<string> unknownCodes)
+        void Validate(ReadOnlySpan<char> text, in AnsiParserFoundStyle parsedStyle, IEnumerable<string> unknownCodes)
         {
             triggered = true;
             Assert.AreEqual(expected, text.ToString());
@@ -138,7 +138,7 @@ public class AnsiParserTest
 
         // Assert
         Assert.IsTrue(triggered);
-        void Validate(ReadOnlySpan<char> text, AnsiParserFoundStyle parsedStyle, IEnumerable<string> unknownCodes)
+        void Validate(ReadOnlySpan<char> text, in AnsiParserFoundStyle parsedStyle, IEnumerable<string> unknownCodes)
         {
             triggered = true;
             Assert.AreEqual(expected[index++], text.ToString());
