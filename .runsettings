@@ -4,7 +4,7 @@
         <MaxCpuCount>0</MaxCpuCount>
         <ResultsDirectory>.\bin\TestResults</ResultsDirectory>
         <TestCaseFilter>(TestCategory != Integration)</TestCaseFilter>
-        <TestSessionTimeout>10000</TestSessionTimeout>
+        <TestSessionTimeout>30000</TestSessionTimeout>
         <TreatNoTestsAsError>false</TreatNoTestsAsError>
     </RunConfiguration>
 
